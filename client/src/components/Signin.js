@@ -15,14 +15,14 @@ function Signin() {
       );
     }
   };
-  const renderInput = ({ input, label, meta }) => {
-    const placeHolder = "placeholder text here";
+  const renderInput = ({ input, label, forid, meta }) => {
+    // const placeHolder = "placeholder text here";
 
     const className = `${meta.error && meta.touched ? "form error" : "form"}`;
     return (
       <div className={className}>
-        <label>{label}</label>
-        <input {...input} autoComplete="off" />
+        <label htmlFor={forid} role="label">{label}</label>
+        {label==="Password" ? <input {...input} id={forid} type="password" autoComplete="off" /> : <input {...input} id={forid} autoComplete="off" />}
         {renderError(meta)}
       </div>
     );
@@ -30,7 +30,6 @@ function Signin() {
 
   return (
     <div>
-      <h3>Signin with Email</h3>
       <Form
         // initialValues={{
         //   Name: "Dave",
@@ -40,11 +39,15 @@ function Signin() {
         // }}
         onSubmit={() => console.log("submitted")}
         render={({ handleSubmit }) => (
-          <form onSubmit={handleSubmit} className="">
-            <Field name="Name" component={renderInput} label="label 1" />
-            <Field name="Email" component={renderInput} label="label 2" />
-            <Field name="Phone" component={renderInput} label="label 3" />
-            <Field name="Enquiry" component={renderInput} label="label 4" />
+          <form
+            onSubmit={handleSubmit}
+            className=""
+            role="form"
+            name="signinwithemail"
+          >
+            <h3>Signin with Email</h3>
+            <Field name="Email" component={renderInput} label="Email" forid="signinwithemail-email"/>
+            <Field name="Password" component={renderInput} label="Password" forid="signinwithemail-password"/>
             <button className="">Submit</button>
             <p className="success">Success</p>
             <p className="error">error</p>
